@@ -7,12 +7,14 @@ namespace DiningPhilosophers_n {
         public event Action Unlocked;
 
         internal bool Pickup() {
-            if (IsHeld) return false;
-            if (Monitor.TryEnter(this, 500)) {
-                IsHeld = true;
-                return true;
+            lock (this) {
+                if (IsHeld) return false;
+                if (Monitor.TryEnter(this, 500)) {
+                    IsHeld = true;
+                    return true;
+                }
+                return false;
             }
-            return false;
         }
 
         internal bool Putdown() {

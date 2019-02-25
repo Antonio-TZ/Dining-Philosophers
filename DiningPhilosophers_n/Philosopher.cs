@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 
 namespace DiningPhilosophers_n {
     internal class Philosopher {
@@ -15,11 +16,17 @@ namespace DiningPhilosophers_n {
 
         internal bool Eat() {
             if (HoldsBothChopsticks) {
+                ChewAndThink();
                 ReturnBothChopsticks();
                 Eaten = true;
                 return true;
             }
             return false;
+        }
+
+        private void ChewAndThink() {
+            Random random = new Random();
+            Thread.Sleep(random.Next(50,1000));
         }
 
         private void ReturnBothChopsticks() {
@@ -41,9 +48,17 @@ namespace DiningPhilosophers_n {
                     return true;
                 } else {
                     RightChopstick.Unlocked += RightChopstick_Unlocked;
+                    return false;
                 }
+            } else {
+                LeftChopstick.Unlocked += LeftChopstick_Unlocked;
             }
             return false;
+        }
+
+        private void LeftChopstick_Unlocked() {
+            LeftChopstick.Unlocked -= LeftChopstick_Unlocked;
+            EatDinner();
         }
 
         private void RightChopstick_Unlocked() {
