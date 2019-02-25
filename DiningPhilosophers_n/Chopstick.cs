@@ -1,8 +1,10 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 
 namespace DiningPhilosophers_n {
     internal class Chopstick {
         public bool IsHeld { get; private set; }
+        public event Action Unlocked;
 
         internal bool Pickup() {
             if (IsHeld) return false;
@@ -17,6 +19,7 @@ namespace DiningPhilosophers_n {
             if (IsHeld) {
                 Monitor.Exit(this);
                 IsHeld = false;
+                Unlocked?.Invoke();
                 return true;
             }
             return false;
