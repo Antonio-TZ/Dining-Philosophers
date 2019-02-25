@@ -12,5 +12,14 @@ namespace DiningPhilosophers_n {
             }
             return false;
         }
+
+        internal bool Putdown() {
+            if (IsHeld) {
+                Monitor.Exit(this);
+                IsHeld = false;
+                return true;
+            }
+            return false;
+        }
     }
 }

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace DiningPhilosophers_n {
     [TestFixture]
@@ -15,6 +9,13 @@ namespace DiningPhilosophers_n {
             Chopstick chopstick = new Chopstick();
             chopstick.Pickup();
             Assert.That(!chopstick.Pickup());
+        }
+
+        [Test]
+        public void unlock_when_put_down() {
+            Chopstick chopstick = new Chopstick();
+            chopstick.Pickup();
+            Assert.That(chopstick.Putdown());
         }
     }
 }
