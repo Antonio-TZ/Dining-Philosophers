@@ -16,13 +16,15 @@ namespace DiningPhilosophers_n {
         }
 
         internal bool Putdown() {
-            if (IsHeld) {
-                Monitor.Exit(this);
-                IsHeld = false;
-                Unlocked?.Invoke();
-                return true;
+            lock (this) {
+                if (IsHeld) {
+                    Monitor.Exit(this);
+                    IsHeld = false;
+                    Unlocked?.Invoke();
+                    return true;
+                }
+                return false;
             }
-            return false;
         }
     }
 }

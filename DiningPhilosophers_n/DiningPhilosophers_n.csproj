@@ -51,6 +51,8 @@
   <ItemGroup>
     <Compile Include="Chopstick.cs" />
     <Compile Include="ChopstickShould.cs" />
+    <Compile Include="Dinner.cs" />
+    <Compile Include="DinnerShould.cs" />
     <Compile Include="Philosopher.cs" />
     <Compile Include="PhilosopherRange.cs" />
     <Compile Include="PhilosopherShould.cs" />
