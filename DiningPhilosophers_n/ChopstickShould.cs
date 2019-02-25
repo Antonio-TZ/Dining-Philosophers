@@ -24,5 +24,15 @@ namespace DiningPhilosophers_n {
             chopstick.Pickup();
             Assert.That(!chopstick.Pickup());
         }
+
+        [Test]
+        public void signal_event_when_it_unlocks() {
+            Chopstick chopstick = new Chopstick();
+            int callCount = 0;
+            chopstick.Unlocked += () => callCount++;
+            chopstick.Pickup();
+            chopstick.Putdown();
+            Assert.That(callCount == 1);
+        }
     }
 }
