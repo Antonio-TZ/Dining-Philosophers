@@ -17,5 +17,12 @@ namespace DiningPhilosophers_n {
             chopstick.Pickup();
             Assert.That(chopstick.Putdown());
         }
+
+        [Test]
+        public void ignore_requests_to_lock_when_held() {
+            Chopstick chopstick = new Chopstick();
+            chopstick.Pickup();
+            Assert.That(!chopstick.Pickup());
+        }
     }
 }
