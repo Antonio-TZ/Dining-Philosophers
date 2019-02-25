@@ -30,11 +30,15 @@ namespace DiningPhilosophers_n {
         [Test]
         public void eat_after_locked_chopstick_is_returned() {
             List<Philosopher> philosophers = PhilosopherRange.Of(2);
-            philosophers[1].LeftChopstick.Pickup();
-            philosophers[0].EatDinner();
+            QueuePhilosopherForChopstick(philosophers[0], philosophers[1].LeftChopstick);
             philosophers[1].RightChopstick.Pickup();
             philosophers[1].Eat();
             Assert.That(philosophers[0].Eaten);
+        }
+
+        private void QueuePhilosopherForChopstick(Philosopher philosopherToQueue, Chopstick chopstickToQueue) {
+            chopstickToQueue.Pickup();
+            philosopherToQueue.EatDinner();
         }
     }
 }
