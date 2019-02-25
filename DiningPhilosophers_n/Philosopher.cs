@@ -26,11 +26,20 @@ namespace DiningPhilosophers_n {
         }
 
         internal void EatDinner() {
-            if(LeftChopstick.Pickup()) {
-                if(RightChopstick.Pickup()) {
-                    Eat();
+            if(PickupBothChopsticks()) {
+                Eat();
+            } else {
+                ReturnBothChopsticks();
+            }
+        }
+
+        private bool PickupBothChopsticks() {
+            if (LeftChopstick.Pickup()) {
+                if (RightChopstick.Pickup()) {
+                    return true;
                 }
             }
+            return false;
         }
     }
 }

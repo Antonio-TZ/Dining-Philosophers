@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using System.Collections.Generic;
 using NUnit.Framework;
 
 namespace DiningPhilosophers_n {
@@ -22,6 +17,14 @@ namespace DiningPhilosophers_n {
             Philosopher philosopher = new Philosopher();
             philosopher.EatDinner();
             Assert.That(philosopher.IsNotHoldingChopsticks);
+        }
+
+        [Test]
+        public void return_chopsticks_if_unable_to_lock_both() {
+            List<Philosopher> philosophers = PhilosopherRange.Of(2);
+            philosophers[1].LeftChopstick.Pickup();
+            philosophers[0].EatDinner();
+            Assert.That(philosophers[0].IsNotHoldingChopsticks);
         }
     }
 }

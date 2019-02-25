@@ -51,6 +51,9 @@
   <ItemGroup>
     <Compile Include="Chopstick.cs" />
     <Compile Include="ChopstickShould.cs" />
+    <Compile Include="Philosopher.cs" />
+    <Compile Include="PhilosopherRange.cs" />
+    <Compile Include="PhilosopherShould.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
