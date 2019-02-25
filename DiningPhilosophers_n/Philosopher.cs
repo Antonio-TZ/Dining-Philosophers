@@ -4,6 +4,7 @@ namespace DiningPhilosophers_n {
     internal class Philosopher {
         public Chopstick LeftChopstick { get; internal set; }
         public Chopstick RightChopstick { get; internal set; }
+        internal bool Eaten { get; private set; }
         internal bool HoldsBothChopsticks => LeftChopstick.IsHeld && RightChopstick.IsHeld;
         internal bool IsNotHoldingChopsticks => !LeftChopstick.IsHeld && !RightChopstick.IsHeld;
 
@@ -13,8 +14,9 @@ namespace DiningPhilosophers_n {
         }
 
         internal bool Eat() {
-            if(HoldsBothChopsticks) {
+            if (HoldsBothChopsticks) {
                 ReturnBothChopsticks();
+                Eaten = true;
                 return true;
             }
             return false;
@@ -26,7 +28,7 @@ namespace DiningPhilosophers_n {
         }
 
         internal void EatDinner() {
-            if(PickupBothChopsticks()) {
+            if (PickupBothChopsticks()) {
                 Eat();
             } else {
                 ReturnBothChopsticks();
@@ -37,9 +39,16 @@ namespace DiningPhilosophers_n {
             if (LeftChopstick.Pickup()) {
                 if (RightChopstick.Pickup()) {
                     return true;
+                } else {
+                    RightChopstick.Unlocked += RightChopstick_Unlocked;
                 }
             }
             return false;
+        }
+
+        private void RightChopstick_Unlocked() {
+            RightChopstick.Unlocked -= RightChopstick_Unlocked;
+            EatDinner();
         }
     }
 }

@@ -26,5 +26,15 @@ namespace DiningPhilosophers_n {
             philosophers[0].EatDinner();
             Assert.That(philosophers[0].IsNotHoldingChopsticks);
         }
+
+        [Test]
+        public void eat_after_locked_chopstick_is_returned() {
+            List<Philosopher> philosophers = PhilosopherRange.Of(2);
+            philosophers[1].LeftChopstick.Pickup();
+            philosophers[0].EatDinner();
+            philosophers[1].RightChopstick.Pickup();
+            philosophers[1].Eat();
+            Assert.That(philosophers[0].Eaten);
+        }
     }
 }
